@@ -5,6 +5,10 @@
   "main": "ghost-trail.js",
   "scripts": {
     "demo": "open index.html",
+    "build": "node build.js",
+    "build:sourcemap": "node build.js --sourcemap",
+    "minify": "node minify.js",
+    "validate": "node build.js --validate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -43,5 +47,8 @@
     "last 2 versions",
     "not dead",
     "not ie <= 11"
-  ]
+  ],
+  "devDependencies": {
+    "terser": "^5.24.0"
+  }
 }

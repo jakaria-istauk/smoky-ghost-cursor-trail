@@ -25,7 +25,11 @@ A powerful, lightweight WebGL-based ghost cursor trail effect library that bring
 
 #### Direct Script Include
 ```html
+<!-- Development version -->
 <script src="ghost-trail.js"></script>
+
+<!-- Production version (minified) -->
+<script src="ghost-trail.min.js"></script>
 ```
 
 #### ES6 Module
@@ -166,6 +170,59 @@ window.addEventListener('beforeunload', () => {
 });
 ```
 
+## 🔨 Building and Minification
+
+### Build Scripts
+
+The project includes several build scripts for creating optimized versions:
+
+```bash
+# Basic minification (no dependencies required)
+npm run build
+
+# Advanced minification with Terser
+npm run minify
+
+# Build with source maps
+npm run build:sourcemap
+
+# Validate minified output
+npm run validate
+```
+
+### Manual Build
+
+You can also run the build scripts directly:
+
+```bash
+# Simple build
+node build.js
+
+# Build with source maps
+node build.js --sourcemap
+
+# Validate existing build
+node build.js --validate
+
+# Advanced minification (requires Terser)
+node minify.js
+```
+
+### Build Output
+
+- **Development**: `ghost-trail.js` (23.18 KB)
+- **Production**: `ghost-trail.min.js` (14.22 KB, 38.7% smaller)
+- **Source Map**: `ghost-trail.min.js.map` (optional)
+
+### Testing Minified Version
+
+Use the test file to verify the minified version works correctly:
+
+```bash
+# Open test page
+open test-minified.html
+```
+
 ## 🌐 Browser Compatibility
 
 | Browser | Version | WebGL Support |
@@ -186,8 +243,14 @@ window.addEventListener('beforeunload', () => {
 
 ```
 smoky-ghost-cursor-trail/
-├── ghost-trail.js           # Main library file
+├── ghost-trail.js           # Main library file (development)
+├── ghost-trail.min.js       # Minified library file (production)
 ├── index.html              # Interactive demo
+├── test-minified.html      # Minified version test page
+├── build.js                # Simple build script
+├── minify.js               # Advanced minification script
+├── package.json            # NPM package configuration
+├── LICENSE                 # MIT license
 ├── README.md               # This file
 └── prules/
     └── README-SmokyGhostTrail.md # Additional documentation
