@@ -444,6 +444,6 @@ new SmokyGhostTrail('#gaming-zone', {
 
 Made with ❤️ and WebGL magic
 
-[Demo](./index.html) • [Documentation](./prules/README-SmokyGhostTrail.md) • [Examples](#-examples)
+[Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/) • [Documentation](?tab=readme-ov-file) • [Examples](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
 
 </div>
