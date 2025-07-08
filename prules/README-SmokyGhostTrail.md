@@ -1,4 +1,4 @@
-# GhostTrail Library
+# SmokyGhostTrail Library
 
 A WebGL-based ghost cursor trail effect library that can be dynamically instantiated and rendered within any specified target DOM element.
 
@@ -20,19 +20,19 @@ A WebGL-based ghost cursor trail effect library that can be dynamically instanti
 
 ### ES6 Module
 ```javascript
-import GhostTrail from './ghost-trail.js';
+import SmokyGhostTrail from './ghost-trail.js';
 ```
 
 ### CommonJS
 ```javascript
-const GhostTrail = require('./ghost-trail.js');
+const SmokyGhostTrail = require('./ghost-trail.js');
 ```
 
 ## Basic Usage
 
 ```javascript
 // Create a new ghost trail instance
-const ghostTrail = new GhostTrail('#my-element', {
+const ghostTrail = new SmokyGhostTrail('#my-element', {
     size: 0.1,
     tail: {
         dotsNumber: 25,
@@ -75,7 +75,7 @@ ghostTrail.destroy();
 
 ### Constructor
 ```javascript
-new GhostTrail(target, options)
+new SmokyGhostTrail(target, options)
 ```
 - `target`: CSS selector string or DOM element
 - `options`: Configuration object (optional)
@@ -126,12 +126,12 @@ const isRunning = ghostTrail.isActive();
 You can create multiple ghost trail instances on different elements:
 
 ```javascript
-const trail1 = new GhostTrail('#element1', {
+const trail1 = new SmokyGhostTrail('#element1', {
     mainColor: [1.0, 0.5, 0.5],
     size: 0.08
 });
 
-const trail2 = new GhostTrail('#element2', {
+const trail2 = new SmokyGhostTrail('#element2', {
     mainColor: [0.5, 1.0, 0.5],
     size: 0.12
 });
@@ -152,7 +152,7 @@ The library includes comprehensive error handling:
 
 ```javascript
 try {
-    const ghostTrail = new GhostTrail('#non-existent-element');
+    const ghostTrail = new SmokyGhostTrail('#non-existent-element');
 } catch (error) {
     console.error('Failed to create ghost trail:', error.message);
 }
@@ -167,7 +167,7 @@ try {
 
 ## Examples
 
-See `ghost-trail-demo.html` for a complete working example with multiple configurations and interactive controls.
+See `index.html` for a complete working example with multiple configurations and interactive controls.
 
 ## License
 

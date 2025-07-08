@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostTrail Library Demo</title>
+    <title>SmokyGhostTrail Library Demo</title>
     <style>
         body, html {
             margin: 0;
@@ -163,7 +163,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>GhostTrail Library Demo</h1>
+            <h1>SmokyGhostTrail Library Demo</h1>
             <p>A WebGL-based ghost cursor trail effect that can be applied to any DOM element</p>
         </div>
 
@@ -224,7 +224,7 @@
             <h2 style="color: white; margin-top: 0;">Usage Example</h2>
             <div class="code-example">
 <pre>// Basic usage
-const ghostTrail = new GhostTrail('#my-element', {
+const ghostTrail = new SmokyGhostTrail('#my-element', {
     size: 0.1,
     tail: {
         dotsNumber: 25,
@@ -253,7 +253,7 @@ ghostTrail.destroy();</pre>
         </div>
     </div>
 
-    <!-- Include the GhostTrail library -->
+    <!-- Include the SmokyGhostTrail library -->
     <script src="ghost-trail.js"></script>
     
     <script>
@@ -276,7 +276,7 @@ ghostTrail.destroy();</pre>
                 }
             };
             
-            demo1Instance = new GhostTrail('#demo1', options);
+            demo1Instance = new SmokyGhostTrail('#demo1', options);
             demo1Instance.start();
         }
 
@@ -305,7 +305,7 @@ ghostTrail.destroy();</pre>
             ];
             
             configs.forEach((config, index) => {
-                const instance = new GhostTrail(`#instance${index + 1}`, {
+                const instance = new SmokyGhostTrail(`#instance${index + 1}`, {
                     ...config,
                     tail: { dotsNumber: 20, spring: 1.2, friction: 0.4 }
                 });

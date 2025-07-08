@@ -1,4 +1,4 @@
-# 👻 GhostTrail
+# 👻 SmokyGhostTrail
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![WebGL](https://img.shields.io/badge/WebGL-Required-blue.svg)](https://caniuse.com/webgl)
@@ -6,7 +6,7 @@
 
 A powerful, lightweight WebGL-based ghost cursor trail effect library that brings mystical, smoky cursor trails to any DOM element. Perfect for creating engaging, interactive web experiences with stunning visual effects.
 
-[GhostTrail Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
+[SmokyGhostTrail Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
 
 ## ✨ Features
 
@@ -30,19 +30,19 @@ A powerful, lightweight WebGL-based ghost cursor trail effect library that bring
 
 #### ES6 Module
 ```javascript
-import GhostTrail from './ghost-trail.js';
+import SmokyGhostTrail from './ghost-trail.js';
 ```
 
 #### CommonJS
 ```javascript
-const GhostTrail = require('./ghost-trail.js');
+const SmokyGhostTrail = require('./ghost-trail.js');
 ```
 
 ### Basic Usage
 
 ```javascript
 // Create a ghost trail on any element
-const ghostTrail = new GhostTrail('#my-element', {
+const ghostTrail = new SmokyGhostTrail('#my-element', {
     size: 0.1,
     mainColor: [0.98, 0.96, 0.96],
     tail: {
@@ -61,7 +61,7 @@ ghostTrail.start();
 ### Constructor
 
 ```javascript
-new GhostTrail(target, options)
+new SmokyGhostTrail(target, options)
 ```
 
 **Parameters:**
@@ -72,10 +72,10 @@ new GhostTrail(target, options)
 
 | Method | Description | Returns |
 |--------|-------------|---------|
-| `start()` | Start the ghost trail effect | `GhostTrail` |
-| `stop()` | Stop the effect (can be restarted) | `GhostTrail` |
-| `destroy()` | Destroy instance and cleanup resources | `GhostTrail` |
-| `updateOptions(options)` | Update configuration dynamically | `GhostTrail` |
+| `start()` | Start the ghost trail effect | `SmokyGhostTrail` |
+| `stop()` | Stop the effect (can be restarted) | `SmokyGhostTrail` |
+| `destroy()` | Destroy instance and cleanup resources | `SmokyGhostTrail` |
+| `updateOptions(options)` | Update configuration dynamically | `SmokyGhostTrail` |
 | `getOptions()` | Get current configuration | `Object` |
 | `isActive()` | Check if effect is running | `Boolean` |
 
@@ -98,7 +98,7 @@ new GhostTrail(target, options)
 
 ## 🎮 Live Demo
 
-Check out the [interactive demo](./ghost-trail-demo.html) to see GhostTrail in action! The demo includes:
+Check out the [interactive demo](./index.html) to see SmokyGhostTrail in action! The demo includes:
 
 - 🎛️ **Real-time controls** for adjusting all parameters
 - 🎨 **Multiple instances** with different configurations  
@@ -109,7 +109,7 @@ Check out the [interactive demo](./ghost-trail-demo.html) to see GhostTrail in a
 
 ### Single Instance
 ```javascript
-const ghost = new GhostTrail('#hero-section', {
+const ghost = new SmokyGhostTrail('#hero-section', {
     size: 0.15,
     mainColor: [1.0, 0.8, 0.9], // Pink ghost
     tail: { dotsNumber: 30, spring: 2.0 }
@@ -120,13 +120,13 @@ ghost.start();
 ### Multiple Instances
 ```javascript
 // Blue ghost on header
-const headerGhost = new GhostTrail('#header', {
+const headerGhost = new SmokyGhostTrail('#header', {
     mainColor: [0.5, 0.8, 1.0],
     size: 0.08
 });
 
-// Red ghost on sidebar  
-const sidebarGhost = new GhostTrail('#sidebar', {
+// Red ghost on sidebar
+const sidebarGhost = new SmokyGhostTrail('#sidebar', {
     mainColor: [1.0, 0.5, 0.5],
     size: 0.12
 });
@@ -138,7 +138,7 @@ sidebarGhost.start();
 
 ### Dynamic Configuration
 ```javascript
-const ghost = new GhostTrail('#canvas');
+const ghost = new SmokyGhostTrail('#canvas');
 ghost.start();
 
 // Change colors on hover
@@ -187,10 +187,10 @@ window.addEventListener('beforeunload', () => {
 ```
 smoky-ghost-cursor-trail/
 ├── ghost-trail.js           # Main library file
-├── ghost-trail-demo.html    # Interactive demo
+├── index.html              # Interactive demo
 ├── README.md               # This file
 └── prules/
-    └── README-GhostTrail.md # Additional documentation
+    └── README-SmokyGhostTrail.md # Additional documentation
 ```
 
 ## 🤝 Contributing
@@ -234,7 +234,7 @@ The library uses WebGL shaders for rendering. While the default shaders provide 
 
 ```javascript
 // For better performance on lower-end devices
-const ghost = new GhostTrail('#element', {
+const ghost = new SmokyGhostTrail('#element', {
     tail: { dotsNumber: 15 }, // Reduce particles
     size: 0.08,               // Smaller size
     mouseThreshold: 0.2       // Less smooth movement
@@ -246,14 +246,14 @@ const ghost = new GhostTrail('#element', {
 #### React
 ```jsx
 import { useEffect, useRef } from 'react';
-import GhostTrail from './ghost-trail.js';
+import SmokyGhostTrail from './ghost-trail.js';
 
 function GhostComponent() {
     const elementRef = useRef();
     const ghostRef = useRef();
 
     useEffect(() => {
-        ghostRef.current = new GhostTrail(elementRef.current);
+        ghostRef.current = new SmokyGhostTrail(elementRef.current);
         ghostRef.current.start();
 
         return () => ghostRef.current?.destroy();
@@ -270,11 +270,11 @@ function GhostComponent() {
 </template>
 
 <script>
-import GhostTrail from './ghost-trail.js';
+import SmokyGhostTrail from './ghost-trail.js';
 
 export default {
     mounted() {
-        this.ghost = new GhostTrail(this.$refs.ghostElement);
+        this.ghost = new SmokyGhostTrail(this.$refs.ghostElement);
         this.ghost.start();
     },
     beforeUnmount() {
@@ -291,7 +291,7 @@ export default {
 **WebGL not supported:**
 ```javascript
 try {
-    const ghost = new GhostTrail('#element');
+    const ghost = new SmokyGhostTrail('#element');
     ghost.start();
 } catch (error) {
     console.warn('WebGL not supported:', error.message);
@@ -310,7 +310,7 @@ try {
 // Always check if element exists
 const element = document.querySelector('#my-element');
 if (element) {
-    const ghost = new GhostTrail(element);
+    const ghost = new SmokyGhostTrail(element);
     ghost.start();
 }
 ```
@@ -327,7 +327,7 @@ if (element) {
 
 ### Spooky Halloween Theme
 ```javascript
-new GhostTrail('#halloween-section', {
+new SmokyGhostTrail('#halloween-section', {
     mainColor: [1.0, 0.4, 0.0],      // Orange
     borderColor: [0.8, 0.0, 0.8],    // Purple
     size: 0.15,
@@ -337,7 +337,7 @@ new GhostTrail('#halloween-section', {
 
 ### Elegant Minimal Theme
 ```javascript
-new GhostTrail('#minimal-area', {
+new SmokyGhostTrail('#minimal-area', {
     mainColor: [0.9, 0.9, 0.9],      // Light gray
     borderColor: [0.7, 0.7, 0.7],    // Darker gray
     size: 0.06,
@@ -348,7 +348,7 @@ new GhostTrail('#minimal-area', {
 
 ### Vibrant Gaming Theme
 ```javascript
-new GhostTrail('#gaming-zone', {
+new SmokyGhostTrail('#gaming-zone', {
     mainColor: [0.0, 1.0, 0.5],      // Neon green
     borderColor: [0.0, 0.5, 1.0],    // Electric blue
     size: 0.2,
@@ -381,6 +381,6 @@ new GhostTrail('#gaming-zone', {
 
 Made with ❤️ and WebGL magic
 
-[Demo](./ghost-trail-demo.html) • [Documentation](./prules/README-GhostTrail.md) • [Examples](#-examples)
+[Demo](./index.html) • [Documentation](./prules/README-SmokyGhostTrail.md) • [Examples](#-examples)
 
 </div>

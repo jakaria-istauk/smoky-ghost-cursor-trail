@@ -1,12 +1,12 @@
 /**
- * GhostTrail - A WebGL-based ghost cursor trail effect library
+ * SmokyGhostTrail - A WebGL-based ghost cursor trail effect library
  *
  * Usage:
- * const ghostTrail = new GhostTrail(targetElement, options);
+ * const ghostTrail = new SmokyGhostTrail(targetElement, options);
  * ghostTrail.start();
  */
 
-class GhostTrail {
+class SmokyGhostTrail {
     constructor(target, options = {}) {
         // Validate target element
         this.targetElement = this._validateTarget(target);
@@ -119,7 +119,7 @@ class GhostTrail {
                 this.targetElement.offsetHeight * 0.8
             );
         } catch (error) {
-            console.error('Failed to initialize GhostTrail:', error);
+            console.error('Failed to initialize SmokyGhostTrail:', error);
             throw error;
         }
     }
@@ -715,9 +715,9 @@ class GhostTrail {
 
 // Export for different module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = GhostTrail;
+    module.exports = SmokyGhostTrail;
 } else if (typeof define === 'function' && define.amd) {
-    define([], function() { return GhostTrail; });
+    define([], function() { return SmokyGhostTrail; });
 } else if (typeof window !== 'undefined') {
-    window.GhostTrail = GhostTrail;
+    window.SmokyGhostTrail = SmokyGhostTrail;
 }
