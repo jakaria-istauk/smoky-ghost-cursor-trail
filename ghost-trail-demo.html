@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostTrail Library Demo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-area {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            height: 300px;
+            position: relative;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .demo-area:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .control-group label {
+            display: block;
+            color: white;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .code-example {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .multiple-instances {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .instance-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            height: 150px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GhostTrail Library Demo</h1>
+            <p>A WebGL-based ghost cursor trail effect that can be applied to any DOM element</p>
+        </div>
+
+        <!-- Basic Demo -->
+        <div class="demo-section">
+            <h2 style="color: white; margin-top: 0;">Basic Ghost Trail</h2>
+            <div class="demo-area" id="demo1">
+                Move your cursor here to see the ghost trail effect
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="size">Size:</label>
+                    <input type="range" id="size" min="0.02" max="0.3" step="0.01" value="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="dotsNumber">Trail Length:</label>
+                    <input type="range" id="dotsNumber" min="10" max="50" step="1" value="25">
+                </div>
+                <div class="control-group">
+                    <label for="spring">Spring:</label>
+                    <input type="range" id="spring" min="0.5" max="3" step="0.1" value="1.4">
+                </div>
+                <div class="control-group">
+                    <label for="friction">Friction:</label>
+                    <input type="range" id="friction" min="0.1" max="0.9" step="0.05" value="0.3">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startDemo1()">Start</button>
+                <button class="btn btn-secondary" onclick="stopDemo1()">Stop</button>
+                <button class="btn btn-danger" onclick="destroyDemo1()">Destroy</button>
+            </div>
+        </div>
+
+        <!-- Multiple Instances Demo -->
+        <div class="demo-section">
+            <h2 style="color: white; margin-top: 0;">Multiple Instances</h2>
+            <p style="color: rgba(255,255,255,0.8);">Each box has its own independent ghost trail with different configurations:</p>
+            
+            <div class="multiple-instances">
+                <div class="instance-box" id="instance1">Blue Ghost</div>
+                <div class="instance-box" id="instance2">Red Ghost</div>
+                <div class="instance-box" id="instance3">Green Ghost</div>
+                <div class="instance-box" id="instance4">Purple Ghost</div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startMultipleInstances()">Start All</button>
+                <button class="btn btn-secondary" onclick="stopMultipleInstances()">Stop All</button>
+                <button class="btn btn-danger" onclick="destroyMultipleInstances()">Destroy All</button>
+            </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="demo-section">
+            <h2 style="color: white; margin-top: 0;">Usage Example</h2>
+            <div class="code-example">
+<pre>// Basic usage
+const ghostTrail = new GhostTrail('#my-element', {
+    size: 0.1,
+    tail: {
+        dotsNumber: 25,
+        spring: 1.4,
+        friction: 0.3,
+        gravity: 0
+    },
+    mainColor: [0.98, 0.96, 0.96],
+    borderColor: [0.2, 0.5, 0.7],
+    isFlatColor: false
+});
+
+// Start the effect
+ghostTrail.start();
+
+// Update options dynamically
+ghostTrail.updateOptions({
+    size: 0.15,
+    mainColor: [1.0, 0.5, 0.5]
+});
+
+// Stop and clean up
+ghostTrail.stop();
+ghostTrail.destroy();</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the GhostTrail library -->
+    <script src="ghost-trail.js"></script>
+    
+    <script>
+        let demo1Instance = null;
+        let multipleInstances = [];
+
+        // Demo 1 functions
+        function startDemo1() {
+            if (demo1Instance) {
+                demo1Instance.destroy();
+            }
+            
+            const options = {
+                size: parseFloat(document.getElementById('size').value),
+                tail: {
+                    dotsNumber: parseInt(document.getElementById('dotsNumber').value),
+                    spring: parseFloat(document.getElementById('spring').value),
+                    friction: parseFloat(document.getElementById('friction').value),
+                    gravity: 0
+                }
+            };
+            
+            demo1Instance = new GhostTrail('#demo1', options);
+            demo1Instance.start();
+        }
+
+        function stopDemo1() {
+            if (demo1Instance) {
+                demo1Instance.stop();
+            }
+        }
+
+        function destroyDemo1() {
+            if (demo1Instance) {
+                demo1Instance.destroy();
+                demo1Instance = null;
+            }
+        }
+
+        // Multiple instances functions
+        function startMultipleInstances() {
+            destroyMultipleInstances();
+            
+            const configs = [
+                { mainColor: [0.5, 0.8, 1.0], borderColor: [0.2, 0.4, 0.8], size: 0.08 },
+                { mainColor: [1.0, 0.5, 0.5], borderColor: [0.8, 0.2, 0.2], size: 0.12 },
+                { mainColor: [0.5, 1.0, 0.5], borderColor: [0.2, 0.8, 0.2], size: 0.1 },
+                { mainColor: [1.0, 0.5, 1.0], borderColor: [0.8, 0.2, 0.8], size: 0.09 }
+            ];
+            
+            configs.forEach((config, index) => {
+                const instance = new GhostTrail(`#instance${index + 1}`, {
+                    ...config,
+                    tail: { dotsNumber: 20, spring: 1.2, friction: 0.4 }
+                });
+                instance.start();
+                multipleInstances.push(instance);
+            });
+        }
+
+        function stopMultipleInstances() {
+            multipleInstances.forEach(instance => instance.stop());
+        }
+
+        function destroyMultipleInstances() {
+            multipleInstances.forEach(instance => instance.destroy());
+            multipleInstances = [];
+        }
+
+        // Update demo1 when controls change
+        ['size', 'dotsNumber', 'spring', 'friction'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                if (demo1Instance && demo1Instance.isActive()) {
+                    const options = {
+                        size: parseFloat(document.getElementById('size').value),
+                        tail: {
+                            dotsNumber: parseInt(document.getElementById('dotsNumber').value),
+                            spring: parseFloat(document.getElementById('spring').value),
+                            friction: parseFloat(document.getElementById('friction').value)
+                        }
+                    };
+                    demo1Instance.updateOptions(options);
+                }
+            });
+        });
+
+        // Auto-start demo1 on page load
+        window.addEventListener('load', () => {
+            setTimeout(startDemo1, 500);
+        });
+    </script>
+</body>
+</html>
