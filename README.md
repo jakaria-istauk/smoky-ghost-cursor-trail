@@ -6,7 +6,7 @@
 
 A powerful, lightweight WebGL-based ghost cursor trail effect library that brings mystical, smoky cursor trails to any DOM element. Perfect for creating engaging, interactive web experiences with stunning visual effects.
 
-![GhostTrail Demo](https://via.placeholder.com/800x400/2C3E50/FFFFFF?text=GhostTrail+Demo+%F0%9F%91%BB)
+![GhostTrail Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
 
 ## ✨ Features
 
