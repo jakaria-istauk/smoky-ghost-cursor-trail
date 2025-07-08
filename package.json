@@ -1,0 +1,47 @@
+{
+  "name": "smoky-ghost-cursor-trail",
+  "version": "1.0.1",
+  "description": "A powerful, lightweight WebGL-based ghost cursor trail effect library",
+  "main": "ghost-trail.js",
+  "scripts": {
+    "demo": "open ghost-trail-demo.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webgl",
+    "cursor",
+    "trail",
+    "effect",
+    "animation",
+    "ghost",
+    "particle",
+    "interactive",
+    "javascript",
+    "canvas"
+  ],
+  "author": "GhostTrail Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakaria-istauk/smoky-ghost-cursor-trail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakaria-istauk/smoky-ghost-cursor-trail/issues"
+  },
+  "homepage": "https://github.com/jakaria-istauk/smoky-ghost-cursor-trail#readme",
+  "files": [
+    "ghost-trail.js",
+    "ghost-trail-demo.html",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ]
+}
