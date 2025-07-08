@@ -48,7 +48,8 @@ const SmokyGhostTrail = require('./ghost-trail.js');
 // Create a ghost trail on any element
 const ghostTrail = new SmokyGhostTrail('#my-element', {
     size: 0.1,
-    mainColor: [0.98, 0.96, 0.96],
+    mainColor: "#FAFAFA",    // Light gray-white
+    borderColor: "#3399CC",  // Blue
     tail: {
         dotsNumber: 25,
         spring: 1.4,
@@ -93,8 +94,30 @@ new SmokyGhostTrail(target, options)
 | `tail.friction` | Number | `0.3` | Friction applied to movement |
 | `tail.gravity` | Number | `0` | Gravity effect on particles |
 | `smile` | Number | `1` | Ghost face expression (0-1) |
-| `mainColor` | Array | `[0.98, 0.96, 0.96]` | RGB values (0-1) for main color |
-| `borderColor` | Array | `[0.2, 0.5, 0.7]` | RGB values (0-1) for border |
+| `mainColor` | String/Array | `"#FAFAFA"` | Hex color string or RGB array (0-1) for main color |
+| `borderColor` | String/Array | `"#3399CC"` | Hex color string or RGB array (0-1) for border |
+
+### Color Format Support
+
+The library supports multiple color formats for `mainColor` and `borderColor`:
+
+#### Hexadecimal Colors (Recommended)
+```javascript
+{
+    mainColor: "#FFFFFF",     // 6-digit hex
+    borderColor: "#F0F"       // 3-digit hex (expands to #FF00FF)
+}
+```
+
+#### RGB Arrays (Legacy Support)
+```javascript
+{
+    mainColor: [1.0, 1.0, 1.0],    // RGB values 0-1
+    borderColor: [1.0, 0.0, 1.0]   // RGB values 0-1
+}
+```
+
+**Note**: Hex colors are automatically converted to RGB arrays internally for WebGL compatibility.
 | `isFlatColor` | Boolean | `false` | Use flat coloring style |
 | `mouseThreshold` | Number | `0.1` | Mouse movement smoothing |
 | `zIndex` | Number | `10000` | CSS z-index for canvas |
@@ -115,7 +138,8 @@ Check out the [interactive demo](./index.html) to see SmokyGhostTrail in action!
 ```javascript
 const ghost = new SmokyGhostTrail('#hero-section', {
     size: 0.15,
-    mainColor: [1.0, 0.8, 0.9], // Pink ghost
+    mainColor: "#FFB3D9",    // Pink ghost
+    borderColor: "#FF6BB3",  // Darker pink border
     tail: { dotsNumber: 30, spring: 2.0 }
 });
 ghost.start();
@@ -125,13 +149,15 @@ ghost.start();
 ```javascript
 // Blue ghost on header
 const headerGhost = new SmokyGhostTrail('#header', {
-    mainColor: [0.5, 0.8, 1.0],
+    mainColor: "#80CCFF",    // Light blue
+    borderColor: "#3399CC",  // Darker blue
     size: 0.08
 });
 
 // Red ghost on sidebar
 const sidebarGhost = new SmokyGhostTrail('#sidebar', {
-    mainColor: [1.0, 0.5, 0.5],
+    mainColor: "#FF8080",    // Light red
+    borderColor: "#CC3333",  // Darker red
     size: 0.12
 });
 
@@ -148,7 +174,8 @@ ghost.start();
 // Change colors on hover
 element.addEventListener('mouseenter', () => {
     ghost.updateOptions({
-        mainColor: [1.0, 0.5, 0.5],
+        mainColor: "#FF8080",    // Light red
+        borderColor: "#CC3333",  // Darker red
         size: 0.15
     });
 });
@@ -156,7 +183,8 @@ element.addEventListener('mouseenter', () => {
 // Reset on leave
 element.addEventListener('mouseleave', () => {
     ghost.updateOptions({
-        mainColor: [0.98, 0.96, 0.96],
+        mainColor: "#FAFAFA",    // Light gray-white
+        borderColor: "#3399CC",  // Blue
         size: 0.1
     });
 });
@@ -316,7 +344,10 @@ function GhostComponent() {
     const ghostRef = useRef();
 
     useEffect(() => {
-        ghostRef.current = new SmokyGhostTrail(elementRef.current);
+        ghostRef.current = new SmokyGhostTrail(elementRef.current, {
+            mainColor: "#E6E6FF",   // Light blue-white
+            borderColor: "#4D99FF"  // Bright blue
+        });
         ghostRef.current.start();
 
         return () => ghostRef.current?.destroy();
@@ -337,7 +368,10 @@ import SmokyGhostTrail from './ghost-trail.js';
 
 export default {
     mounted() {
-        this.ghost = new SmokyGhostTrail(this.$refs.ghostElement);
+        this.ghost = new SmokyGhostTrail(this.$refs.ghostElement, {
+            mainColor: "#E6E6FF",   // Light blue-white
+            borderColor: "#4D99FF"  // Bright blue
+        });
         this.ghost.start();
     },
     beforeUnmount() {
@@ -391,8 +425,8 @@ if (element) {
 ### Spooky Halloween Theme
 ```javascript
 new SmokyGhostTrail('#halloween-section', {
-    mainColor: [1.0, 0.4, 0.0],      // Orange
-    borderColor: [0.8, 0.0, 0.8],    // Purple
+    mainColor: "#FF6600",      // Orange
+    borderColor: "#CC00CC",    // Purple
     size: 0.15,
     tail: { dotsNumber: 35, spring: 0.8, friction: 0.2 }
 });
@@ -401,8 +435,8 @@ new SmokyGhostTrail('#halloween-section', {
 ### Elegant Minimal Theme
 ```javascript
 new SmokyGhostTrail('#minimal-area', {
-    mainColor: [0.9, 0.9, 0.9],      // Light gray
-    borderColor: [0.7, 0.7, 0.7],    // Darker gray
+    mainColor: "#E6E6E6",      // Light gray
+    borderColor: "#B3B3B3",    // Darker gray
     size: 0.06,
     isFlatColor: true,
     tail: { dotsNumber: 15, spring: 2.0, friction: 0.5 }
@@ -412,8 +446,8 @@ new SmokyGhostTrail('#minimal-area', {
 ### Vibrant Gaming Theme
 ```javascript
 new SmokyGhostTrail('#gaming-zone', {
-    mainColor: [0.0, 1.0, 0.5],      // Neon green
-    borderColor: [0.0, 0.5, 1.0],    // Electric blue
+    mainColor: "#00FF80",      // Neon green
+    borderColor: "#0080FF",    // Electric blue
     size: 0.2,
     tail: { dotsNumber: 40, spring: 1.8, friction: 0.1 }
 });

@@ -232,8 +232,8 @@ const ghostTrail = new SmokyGhostTrail('#my-element', {
         friction: 0.3,
         gravity: 0
     },
-    mainColor: [0.98, 0.96, 0.96],
-    borderColor: [0.2, 0.5, 0.7],
+    mainColor: "#FAFAFA",    // Light gray-white
+    borderColor: "#3399CC",  // Blue
     isFlatColor: false
 });
 
@@ -243,7 +243,7 @@ ghostTrail.start();
 // Update options dynamically
 ghostTrail.updateOptions({
     size: 0.15,
-    mainColor: [1.0, 0.5, 0.5]
+    mainColor: "#FF8080"     // Light red
 });
 
 // Stop and clean up
@@ -298,10 +298,10 @@ ghostTrail.destroy();</pre>
             destroyMultipleInstances();
             
             const configs = [
-                { mainColor: [0.5, 0.8, 1.0], borderColor: [0.2, 0.4, 0.8], size: 0.08 },
-                { mainColor: [1.0, 0.5, 0.5], borderColor: [0.8, 0.2, 0.2], size: 0.12 },
-                { mainColor: [0.5, 1.0, 0.5], borderColor: [0.2, 0.8, 0.2], size: 0.1 },
-                { mainColor: [1.0, 0.5, 1.0], borderColor: [0.8, 0.2, 0.8], size: 0.09 }
+                { mainColor: "#80CCFF", borderColor: "#3366CC", size: 0.08 },  // Blue ghost
+                { mainColor: "#FF8080", borderColor: "#CC3333", size: 0.12 },  // Red ghost
+                { mainColor: "#80FF80", borderColor: "#33CC33", size: 0.1 },   // Green ghost
+                { mainColor: "#FF80FF", borderColor: "#CC33CC", size: 0.09 }   // Purple ghost
             ];
             
             configs.forEach((config, index) => {

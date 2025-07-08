@@ -4,6 +4,12 @@
  * Usage:
  * const ghostTrail = new SmokyGhostTrail(targetElement, options);
  * ghostTrail.start();
+ *
+ * Example with hex colors:
+ * const ghostTrail = new SmokyGhostTrail('#element', {
+ *     mainColor: "#FFFFFF",
+ *     borderColor: "#3399FF"
+ * });
  */
 
 class SmokyGhostTrail {
@@ -24,16 +30,18 @@ class SmokyGhostTrail {
                 gravity: 0,
             },
             smile: 1,
-            mainColor: [0.98, 0.96, 0.96],
-            borderColor: [0.2, 0.5, 0.7],
+            mainColor: "#FAFAFA",  // Light gray-white
+            borderColor: "#3399CC", // Blue
             isFlatColor: false,
             mouseThreshold: 0.1,
             zIndex: 10000,
             pointerEvents: 'none'
         };
 
-        // Merge options with defaults
-        this.options = this._mergeOptions(this.defaultOptions, options);
+        // Normalize colors and merge options with defaults
+        const normalizedDefaults = this._normalizeColors(this.defaultOptions);
+        const normalizedOptions = this._normalizeColors(options);
+        this.options = this._mergeOptions(normalizedDefaults, normalizedOptions);
 
         // Internal state
         this.isRunning = false;
@@ -64,6 +72,79 @@ class SmokyGhostTrail {
 
         // Initialize
         this._init();
+    }
+
+    /**
+     * Convert hexadecimal color to RGB array (0-1 range)
+     * @param {string|Array} color - Hex color string (#RRGGBB, #RGB) or RGB array
+     * @returns {Array} RGB array with values 0-1
+     */
+    _hexToRgb(color) {
+        // If already an array, validate and return
+        if (Array.isArray(color)) {
+            if (color.length !== 3) {
+                throw new Error('RGB array must have exactly 3 values');
+            }
+            // Validate range (0-1)
+            for (let i = 0; i < 3; i++) {
+                if (typeof color[i] !== 'number' || color[i] < 0 || color[i] > 1) {
+                    throw new Error('RGB array values must be numbers between 0 and 1');
+                }
+            }
+            return [...color]; // Return copy
+        }
+
+        // Handle hex string
+        if (typeof color !== 'string') {
+            throw new Error('Color must be a hex string (e.g., "#FF5733") or RGB array');
+        }
+
+        // Remove # if present
+        let hex = color.replace('#', '');
+
+        // Validate hex format
+        if (!/^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{6}$/.test(hex)) {
+            throw new Error(`Invalid hex color format: "${color}". Use #RGB or #RRGGBB format`);
+        }
+
+        // Convert 3-digit hex to 6-digit
+        if (hex.length === 3) {
+            hex = hex.split('').map(char => char + char).join('');
+        }
+
+        // Parse hex to RGB
+        const r = parseInt(hex.substring(0, 2), 16) / 255;
+        const g = parseInt(hex.substring(2, 4), 16) / 255;
+        const b = parseInt(hex.substring(4, 6), 16) / 255;
+
+        return [r, g, b];
+    }
+
+    /**
+     * Normalize color options to RGB arrays
+     * @param {Object} options - Options object with potential hex colors
+     * @returns {Object} Options with RGB arrays
+     */
+    _normalizeColors(options) {
+        const normalized = { ...options };
+
+        if (options.mainColor !== undefined) {
+            try {
+                normalized.mainColor = this._hexToRgb(options.mainColor);
+            } catch (error) {
+                throw new Error(`Invalid mainColor: ${error.message}`);
+            }
+        }
+
+        if (options.borderColor !== undefined) {
+            try {
+                normalized.borderColor = this._hexToRgb(options.borderColor);
+            } catch (error) {
+                throw new Error(`Invalid borderColor: ${error.message}`);
+            }
+        }
+
+        return normalized;
     }
 
     /**
@@ -638,13 +719,15 @@ class SmokyGhostTrail {
 
     /**
      * Update configuration options
+     * @param {Object} newOptions - New options to apply (supports hex colors)
      */
     updateOptions(newOptions) {
-        this.options = this._mergeOptions(this.options, newOptions);
+        const normalizedOptions = this._normalizeColors(newOptions);
+        this.options = this._mergeOptions(this.options, normalizedOptions);
 
         // Update WebGL uniforms if they changed
         if (this.gl && this.uniforms) {
-            if (newOptions.size !== undefined) {
+            if (normalizedOptions.size !== undefined) {
                 this.gl.uniform1f(this.uniforms.u_size, this.options.size);
                 // Update trail dot sizes
                 const dotSize = (i) => this.options.size * this._getContainerHeight() *
@@ -653,13 +736,13 @@ class SmokyGhostTrail {
                     this.pointerTrail[i].r = dotSize(i);
                 }
             }
-            if (newOptions.mainColor !== undefined) {
+            if (normalizedOptions.mainColor !== undefined) {
                 this.gl.uniform3f(this.uniforms.u_main_color, ...this.options.mainColor);
             }
-            if (newOptions.borderColor !== undefined) {
+            if (normalizedOptions.borderColor !== undefined) {
                 this.gl.uniform3f(this.uniforms.u_border_color, ...this.options.borderColor);
             }
-            if (newOptions.isFlatColor !== undefined) {
+            if (normalizedOptions.isFlatColor !== undefined) {
                 this.gl.uniform1f(this.uniforms.u_flat_color, this.options.isFlatColor ? 1 : 0);
             }
         }

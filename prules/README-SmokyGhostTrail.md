@@ -40,8 +40,9 @@ const ghostTrail = new SmokyGhostTrail('#my-element', {
         friction: 0.3,
         gravity: 0
     },
-    mainColor: [0.98, 0.96, 0.96],
-    borderColor: [0.2, 0.5, 0.7]
+    mainColor: "#FAFAFA",    // Light gray-white (hex format)
+    borderColor: "#3399CC"   // Blue (hex format)
+    // Also supports RGB arrays: [0.98, 0.96, 0.96] for backward compatibility
 });
 
 // Start the effect
@@ -127,12 +128,14 @@ You can create multiple ghost trail instances on different elements:
 
 ```javascript
 const trail1 = new SmokyGhostTrail('#element1', {
-    mainColor: [1.0, 0.5, 0.5],
+    mainColor: "#FF8080",    // Light red
+    borderColor: "#CC3333",  // Darker red
     size: 0.08
 });
 
 const trail2 = new SmokyGhostTrail('#element2', {
-    mainColor: [0.5, 1.0, 0.5],
+    mainColor: "#80FF80",    // Light green
+    borderColor: "#33CC33",  // Darker green
     size: 0.12
 });
 
