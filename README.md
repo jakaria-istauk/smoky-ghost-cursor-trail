@@ -381,6 +381,6 @@ new GhostTrail('#gaming-zone', {
 
 Made with ❤️ and WebGL magic
 
-[Demo](./ghost-trail-demo.html) • [Documentation](./prules/README-GhostTrail.md) • [Examples](#-examples)
+[Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/) • [Documentation](?tab=readme-ov-file) • [Examples](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
 
 </div>
