@@ -476,7 +476,7 @@ new SmokyGhostTrail('#gaming-zone', {
 
 **[⭐ Star this repo](../../stargazers) • [🐛 Report Bug](../../issues) • [💡 Request Feature](../../issues)**
 
-Made with ❤️ and WebGL magic
+Made with ❤️ and WebGL magic. Based orginal work by [Ksenia Kondrashova](https://codepen.io/ksenia-k) in [Codepan](https://codepen.io/ksenia-k/pen/yLGxEKb)
 
 [Demo](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/) • [Documentation](?tab=readme-ov-file) • [Examples](https://jakaria-istauk.github.io/smoky-ghost-cursor-trail/)
 
